@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommended Products</title>
+    <title>ShortFormat4You - Recommended Products</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -16,86 +16,148 @@
             align-items: center;
             padding: 40px 20px;
         }
-        .profile { text-align: center; margin-bottom: 32px; }
+        .profile { text-align: center; margin-bottom: 24px; }
         .profile h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
         .profile p { color: #888; font-size: 14px; }
+        .filters { display: flex; flex-wrap: wrap; gap: 8px; max-width: 480px; margin-bottom: 20px; justify-content: center; }
+        .filter-btn {
+            background: #1a1a1a; border: 1px solid #2a2a2a; color: #ccc;
+            padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer;
+        }
+        .filter-btn.active { background: #fff; color: #000; border-color: #fff; }
         .links { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 12px; }
         .link-card {
-            display: block;
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 12px;
-            padding: 16px 20px;
-            text-decoration: none;
-            color: #fff;
-            transition: transform 0.15s, background 0.15s;
+            display: block; background: #1a1a1a; border: 1px solid #2a2a2a;
+            border-radius: 12px; padding: 16px 20px; text-decoration: none;
+            color: #fff; transition: transform 0.15s, background 0.15s;
         }
         .link-card:hover { transform: scale(1.02); background: #222; }
         .link-card .title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
         .link-card .desc { color: #999; font-size: 13px; }
+        .link-card .price { color: #4ade80; font-weight: 600; font-size: 14px; margin-top: 6px; }
         .link-card .tag {
-            display: inline-block;
-            background: #2a2a2a;
-            color: #ccc;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-top: 8px;
+            display: inline-block; background: #2a2a2a; color: #ccc;
+            font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-top: 8px; margin-right: 4px;
         }
+        .section-title { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 16px 0 8px; max-width: 480px; width: 100%; }
     </style>
 </head>
 <body>
     <div class="profile">
-        <h1>My Top Picks</h1>
-        <p>Products I personally use and recommend</p>
+        <h1>ShortFormat4You</h1>
+        <p>Products I use and recommend</p>
     </div>
+    <div class="filters" id="filters"></div>
     <div class="links" id="links"></div>
     <script>
-        // VideoBot auto-updates this list
+        const tag = "shortformat4y-20";
         const links = [
-            {
-                id: "mitolyn",
-                title: "Mitolyn Energy Supplement",
-                desc: "Boost your focus and mental clarity naturally",
-                url: "https://bit.ly/4rW68th",
-                tags: ["energy", "focus"]
-            },
-            {
-                id: "energy-revolution",
-                title: "Energy Revolution System",
-                desc: "The system that changed how I earn online",
-                url: "https://bit.ly/47QH0N8",
-                tags: ["income", "side hustle"]
-            },
-            {
-                id: "citrusburn",
-                title: "CitrusBurn Weight Loss",
-                desc: "Natural metabolism support that actually works",
-                url: "https://bit.ly/47nArBA",
-                tags: ["weight loss", "health"]
-            }
+            // === DIGITAL PRODUCTS ===
+            { id: "mitolyn", title: "Mitolyn Energy Supplement", desc: "Boost your focus and mental clarity naturally", url: "https://bit.ly/4rW68th", category: "digital", tags: ["energy", "focus"] },
+            { id: "energy-revolution", title: "Energy Revolution System", desc: "The system that changed how I earn online", url: "https://bit.ly/47QH0N8", category: "digital", tags: ["income", "side hustle"] },
+            { id: "citrusburn", title: "CitrusBurn Weight Loss", desc: "Natural metabolism support that actually works", url: "https://bit.ly/47nArBA", category: "digital", tags: ["weight loss", "health"] },
+
+            // === HEALTH & FITNESS ===
+            { id: "jump-rope", title: "Digital Jump Rope with LCD Counter", desc: "Counts your calories automatically while you skip", price: "$15", url: `https://www.amazon.com/s?k=digital+jump+rope+LCD+counter&tag=${tag}`, category: "health", tags: ["fitness", "cardio"] },
+            { id: "massage-gun", title: "Mini Massage Gun", desc: "Rivals the $300 Theragun at a fraction of the price", price: "$30", url: `https://www.amazon.com/s?k=mini+massage+gun+portable&tag=${tag}`, category: "health", tags: ["recovery", "muscle"] },
+            { id: "resistance-bands", title: "Resistance Band Set", desc: "Replace your entire gym membership with these", price: "$15", url: `https://www.amazon.com/s?k=fabric+resistance+bands+set&tag=${tag}`, category: "health", tags: ["fitness", "home gym"] },
+            { id: "foam-roller", title: "Foam Roller", desc: "Fixes back pain in 60 seconds flat", price: "$20", url: `https://www.amazon.com/s?k=vibrating+foam+roller+muscle+recovery&tag=${tag}`, category: "health", tags: ["recovery", "pain relief"] },
+            { id: "water-bottle", title: "Motivational Water Bottle", desc: "Shames you into staying hydrated all day", price: "$12", url: `https://www.amazon.com/s?k=motivational+water+bottle+time+marker&tag=${tag}`, category: "health", tags: ["hydration", "health"] },
+            { id: "ab-roller", title: "Ab Roller Wheel", desc: "The only ab tool that actually works", price: "$18", url: `https://www.amazon.com/s?k=ab+roller+wheel+knee+pad&tag=${tag}`, category: "health", tags: ["abs", "core"] },
+            { id: "hula-hoop", title: "Weighted Hula Hoop", desc: "Lost 2 inches in my waist using this", price: "$25", url: `https://www.amazon.com/s?k=weighted+hula+hoop+adjustable+adult&tag=${tag}`, category: "health", tags: ["weight loss", "fun"] },
+            { id: "ankle-weights", title: "Adjustable Ankle Weights", desc: "Burn 40% more calories on every walk", price: "$20", url: `https://www.amazon.com/s?k=adjustable+ankle+weights+walking&tag=${tag}`, category: "health", tags: ["walking", "cardio"] },
+
+            // === PRODUCTIVITY ===
+            { id: "monitor-light", title: "Monitor Light Bar", desc: "Eliminated my eye strain instantly", price: "$25", url: `https://www.amazon.com/s?k=monitor+light+bar+LED+screen&tag=${tag}`, category: "productivity", tags: ["desk", "eye care"] },
+            { id: "mug-warmer", title: "Coffee Mug Warmer", desc: "Your coffee will never go cold again", price: "$25", url: `https://www.amazon.com/s?k=coffee+mug+warmer+desk+3+settings&tag=${tag}`, category: "productivity", tags: ["coffee", "desk"] },
+            { id: "cable-clips", title: "Cable Management Clips", desc: "Fix your messy desk in 5 minutes", price: "$8", url: `https://www.amazon.com/s?k=cable+management+clips+adhesive+desk&tag=${tag}`, category: "productivity", tags: ["organization", "desk"] },
+            { id: "laptop-stand", title: "Laptop Stand", desc: "The posture fix nobody talks about", price: "$25", url: `https://www.amazon.com/s?k=adjustable+laptop+stand+aluminum&tag=${tag}`, category: "productivity", tags: ["posture", "ergonomic"] },
+            { id: "desk-pad", title: "Leather Desk Pad", desc: "Makes any setup look premium instantly", price: "$12", url: `https://www.amazon.com/s?k=large+leather+desk+pad+mat&tag=${tag}`, category: "productivity", tags: ["aesthetic", "desk"] },
+            { id: "pomodoro", title: "Pomodoro Timer", desc: "The focus hack that 10x'd my productivity", price: "$15", url: `https://www.amazon.com/s?k=digital+pomodoro+timer+desk+cube&tag=${tag}`, category: "productivity", tags: ["focus", "time"] },
+            { id: "wireless-charger", title: "3-in-1 Wireless Charger", desc: "One station, three devices, zero cables", price: "$30", url: `https://www.amazon.com/s?k=3+in+1+wireless+charging+station&tag=${tag}`, category: "productivity", tags: ["charging", "tech"] },
+
+            // === TECH GADGETS ===
+            { id: "face-tracking", title: "AI Face-Tracking Phone Stand", desc: "Follows your face automatically while filming", price: "$35", url: `https://www.amazon.com/s?k=AI+face+tracking+phone+stand+auto+rotate&tag=${tag}`, category: "tech", tags: ["filming", "AI"] },
+            { id: "smart-lights", title: "Smart Light Bulbs (2-Pack)", desc: "Turn your room into a vibe", price: "$18", url: `https://www.amazon.com/s?k=smart+light+bulbs+color+changing+Alexa&tag=${tag}`, category: "tech", tags: ["smart home", "aesthetic"] },
+            { id: "mini-projector", title: "Mini Projector", desc: "Movie theater on your ceiling", price: "$40", url: `https://www.amazon.com/s?k=mini+projector+portable+bedroom&tag=${tag}`, category: "tech", tags: ["movies", "bedroom"] },
+            { id: "tracker-tags", title: "Bluetooth Tracker Tags", desc: "Never lose your keys again", price: "$20", url: `https://www.amazon.com/s?k=Bluetooth+tracker+tag+key+finder+4+pack&tag=${tag}`, category: "tech", tags: ["tracking", "keys"] },
+            { id: "smart-plugs", title: "Smart Plugs (2-Pack)", desc: "Automate your entire house", price: "$12", url: `https://www.amazon.com/s?k=smart+plug+Alexa+2+pack+wifi&tag=${tag}`, category: "tech", tags: ["smart home", "automation"] },
+            { id: "ring-light-clip", title: "Clip-On Ring Light", desc: "Instant lighting upgrade for any phone", price: "$10", url: `https://www.amazon.com/s?k=clip+on+ring+light+phone+selfie&tag=${tag}`, category: "tech", tags: ["lighting", "selfie"] },
+            { id: "power-bank", title: "Magnetic Wireless Power Bank", desc: "MagSafe charging on the go", price: "$30", url: `https://www.amazon.com/s?k=magnetic+wireless+power+bank+MagSafe&tag=${tag}`, category: "tech", tags: ["charging", "travel"] },
+            { id: "bt-speaker", title: "Waterproof Bluetooth Speaker", desc: "10,000 five-star reviews for a reason", price: "$20", url: `https://www.amazon.com/s?k=portable+Bluetooth+speaker+waterproof+small&tag=${tag}`, category: "tech", tags: ["music", "waterproof"] },
+
+            // === BOOKS (4.5% commission) ===
+            { id: "psych-money", title: "Psychology of Money", desc: "The book that changed how I think about wealth", price: "$15", url: `https://www.amazon.com/s?k=Psychology+of+Money+Morgan+Housel&tag=${tag}`, category: "books", tags: ["finance", "mindset"] },
+            { id: "rich-dad", title: "Rich Dad Poor Dad", desc: "The book your school should have made you read", price: "$10", url: `https://www.amazon.com/s?k=Rich+Dad+Poor+Dad+Robert+Kiyosaki&tag=${tag}`, category: "books", tags: ["finance", "classic"] },
+            { id: "ramit", title: "I Will Teach You to Be Rich", desc: "Automate your finances in one weekend", price: "$16", url: `https://www.amazon.com/s?k=I+Will+Teach+You+to+Be+Rich+Ramit+Sethi&tag=${tag}`, category: "books", tags: ["finance", "automation"] },
+            { id: "budget-planner", title: "Budget Planner Journal", desc: "Paid for itself in one month", price: "$10", url: `https://www.amazon.com/s?k=budget+planner+financial+organizer+monthly&tag=${tag}`, category: "books", tags: ["budgeting", "planning"] },
+            { id: "cash-wallet", title: "Cash Envelope Wallet", desc: "The viral TikTok budgeting system", price: "$15", url: `https://www.amazon.com/s?k=cash+envelope+wallet+budget+system&tag=${tag}`, category: "books", tags: ["budgeting", "cash"] },
+            { id: "100-startup", title: "The $100 Startup", desc: "Start a business with just $100", price: "$12", url: `https://www.amazon.com/s?k=The+100+Startup+Chris+Guillebeau&tag=${tag}`, category: "books", tags: ["business", "startup"] },
+
+            // === SIDE HUSTLE GEAR ===
+            { id: "ring-light", title: "Ring Light with Tripod (10\")", desc: "The setup every content creator starts with", price: "$20", url: `https://www.amazon.com/s?k=ring+light+with+tripod+stand+10+inch&tag=${tag}`, category: "gear", tags: ["filming", "lighting"] },
+            { id: "lav-mic", title: "Wireless Lavalier Microphone", desc: "Sound like a pro instantly", price: "$25", url: `https://www.amazon.com/s?k=wireless+lavalier+microphone+phone&tag=${tag}`, category: "gear", tags: ["audio", "filming"] },
+            { id: "phone-tripod", title: "Phone Tripod with Remote", desc: "Start filming content today", price: "$15", url: `https://www.amazon.com/s?k=phone+tripod+with+Bluetooth+remote&tag=${tag}`, category: "gear", tags: ["filming", "mobile"] },
+            { id: "light-box", title: "Portable Photo Light Box", desc: "Make any product look professional", price: "$25", url: `https://www.amazon.com/s?k=portable+photo+light+box+product+photography&tag=${tag}`, category: "gear", tags: ["photography", "reselling"] },
+            { id: "green-screen", title: "Collapsible Green Screen", desc: "Upgrade your videos instantly", price: "$25", url: `https://www.amazon.com/s?k=collapsible+green+screen+portable&tag=${tag}`, category: "gear", tags: ["filming", "effects"] },
+            { id: "blue-light", title: "Blue Light Blocking Glasses", desc: "Save your eyes from screen damage", price: "$12", url: `https://www.amazon.com/s?k=blue+light+blocking+glasses+computer&tag=${tag}`, category: "gear", tags: ["eye care", "work"] },
+            { id: "webcam", title: "Webcam with Ring Light", desc: "Look 10x better on Zoom calls", price: "$30", url: `https://www.amazon.com/s?k=webcam+with+ring+light+1080p&tag=${tag}`, category: "gear", tags: ["video calls", "work"] },
         ];
 
-        // Render links — supports 500+ links, filterable by ?p=product-id
+        const categories = {
+            all: "All",
+            digital: "Digital",
+            health: "Health",
+            productivity: "Productivity",
+            tech: "Tech",
+            books: "Books",
+            gear: "Creator Gear",
+        };
+
+        const filtersEl = document.getElementById('filters');
         const container = document.getElementById('links');
         const params = new URLSearchParams(window.location.search);
-        const filter = params.get('p');
+        const productFilter = params.get('p');
 
-        const visible = filter ? links.filter(l => l.id === filter) : links;
+        let activeCategory = 'all';
 
-        visible.forEach(link => {
-            const a = document.createElement('a');
-            a.href = link.url;
-            a.className = 'link-card';
-            a.target = '_blank';
-            a.rel = 'noopener';
-            a.innerHTML = `
-                <div class="title">${link.title}</div>
-                <div class="desc">${link.desc}</div>
-                ${link.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
-            `;
-            container.appendChild(a);
-        });
+        function render(cat) {
+            container.innerHTML = '';
+            const visible = productFilter
+                ? links.filter(l => l.id === productFilter)
+                : cat === 'all' ? links : links.filter(l => l.category === cat);
+
+            visible.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.className = 'link-card';
+                a.target = '_blank';
+                a.rel = 'noopener';
+                a.innerHTML = `
+                    <div class="title">${link.title}</div>
+                    <div class="desc">${link.desc}</div>
+                    ${link.price ? `<div class="price">${link.price} on Amazon</div>` : ''}
+                    ${link.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
+                `;
+                container.appendChild(a);
+            });
+        }
+
+        if (!productFilter) {
+            Object.entries(categories).forEach(([key, label]) => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn' + (key === 'all' ? ' active' : '');
+                btn.textContent = label;
+                btn.onclick = () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    render(key);
+                };
+                filtersEl.appendChild(btn);
+            });
+        }
+
+        render('all');
     </script>
 </body>
 </html>
