@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShortFormat4You - Recommended Products</title>
+    <title>ShortFormat4You - Recommended Products & Tools</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -16,9 +16,33 @@
             align-items: center;
             padding: 40px 20px;
         }
-        .profile { text-align: center; margin-bottom: 24px; }
+        .profile { text-align: center; margin-bottom: 16px; }
         .profile h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
         .profile p { color: #888; font-size: 14px; }
+        .newsletter-box {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid #0f3460;
+            border-radius: 14px;
+            padding: 20px 24px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .newsletter-box h2 { font-size: 16px; margin-bottom: 6px; }
+        .newsletter-box p { color: #aaa; font-size: 13px; margin-bottom: 12px; }
+        .newsletter-box a {
+            display: inline-block;
+            background: #4f46e5;
+            color: #fff;
+            padding: 10px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .newsletter-box a:hover { background: #4338ca; }
         .filters { display: flex; flex-wrap: wrap; gap: 8px; max-width: 480px; margin-bottom: 20px; justify-content: center; }
         .filter-btn {
             background: #1a1a1a; border: 1px solid #2a2a2a; color: #ccc;
@@ -35,23 +59,60 @@
         .link-card .title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
         .link-card .desc { color: #999; font-size: 13px; }
         .link-card .price { color: #4ade80; font-weight: 600; font-size: 14px; margin-top: 6px; }
+        .link-card .badge-free { color: #60a5fa; font-weight: 600; font-size: 14px; margin-top: 6px; }
         .link-card .tag {
             display: inline-block; background: #2a2a2a; color: #ccc;
             font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-top: 8px; margin-right: 4px;
         }
-        .section-title { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 16px 0 8px; max-width: 480px; width: 100%; }
+        .link-card .tag.hot { background: #7f1d1d; color: #fca5a5; }
+        .section-title {
+            color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+            margin: 20px 0 8px; max-width: 480px; width: 100%;
+        }
+        .disclosure {
+            max-width: 480px; width: 100%; margin-top: 32px; padding: 16px;
+            background: #111; border-radius: 8px; border: 1px solid #222;
+        }
+        .disclosure p { color: #666; font-size: 11px; line-height: 1.5; }
+        .socials { display: flex; gap: 16px; margin: 12px 0 20px; }
+        .socials a { color: #888; text-decoration: none; font-size: 13px; transition: color 0.2s; }
+        .socials a:hover { color: #fff; }
     </style>
 </head>
 <body>
     <div class="profile">
         <h1>ShortFormat4You</h1>
-        <p>Products I use and recommend</p>
+        <p>Products & tools I use and recommend</p>
+    </div>
+    <div class="socials">
+        <a href="https://tiktok.com/@shortformat4you" target="_blank">TikTok</a>
+        <a href="https://instagram.com/shortformat4you" target="_blank">Instagram</a>
+        <a href="https://youtube.com/@shortformat4you" target="_blank">YouTube</a>
+        <a href="https://x.com/shortformat4you" target="_blank">X</a>
+    </div>
+    <div class="newsletter-box">
+        <h2>Get weekly deals + money tips</h2>
+        <p>Free newsletter with the best Amazon finds, side hustle ideas, and tools I discover each week.</p>
+        <a href="#newsletter">Subscribe Free</a>
     </div>
     <div class="filters" id="filters"></div>
     <div class="links" id="links"></div>
+    <div class="disclosure">
+        <p><strong>Affiliate Disclosure:</strong> This page contains affiliate links. I may earn a small commission at no extra cost to you when you make a purchase through these links. I only recommend products and tools I genuinely use or believe in. Thank you for supporting this content!</p>
+    </div>
     <script>
         const tag = "shortformat4y-20";
         const links = [
+            // === TOOLS & SOFTWARE (High Commission) ===
+            { id: "nordvpn", title: "NordVPN - #1 VPN for Privacy", desc: "Protect your data on any network. 30-day money-back guarantee.", badge: "Free Trial", url: "https://go.nordvpn.net/aff_c?offer_id=15&aff_id=YOUR_ID", category: "tools", tags: ["privacy", "security"], hot: true },
+            { id: "notion", title: "Notion - All-in-One Workspace", desc: "Notes, tasks, wikis, databases. The app that replaced 5 others for me.", badge: "Free Plan", url: "https://www.notion.so/", category: "tools", tags: ["productivity", "free"] },
+            { id: "canva", title: "Canva Pro - Design Anything", desc: "Thumbnails, social posts, presentations. AI-powered design made easy.", badge: "Free Plan", url: "https://www.canva.com/", category: "tools", tags: ["design", "content"] },
+            { id: "beehiiv", title: "beehiiv - Start a Newsletter", desc: "Free newsletter platform with built-in monetization. I use this.", badge: "Free Plan", url: "https://www.beehiiv.com/", category: "tools", tags: ["newsletter", "income"], hot: true },
+            { id: "tradingview", title: "TradingView - Charts & Analysis", desc: "The platform every serious investor uses. Real-time data.", badge: "Free Plan", url: "https://www.tradingview.com/", category: "tools", tags: ["investing", "charts"] },
+            { id: "hostinger", title: "Hostinger - Web Hosting from $2/mo", desc: "Start a website or blog. Includes free domain and SSL.", price: "$2/mo", url: "https://www.hostinger.com/", category: "tools", tags: ["website", "business"] },
+            { id: "expressvpn", title: "ExpressVPN - Fastest VPN", desc: "Stream anything, anywhere. Works on all devices.", badge: "Free Trial", url: "https://www.expressvpn.com/", category: "tools", tags: ["streaming", "privacy"] },
+            { id: "capcut", title: "CapCut - Free Video Editor", desc: "The editor behind 90% of TikTok videos. AI captions, effects, templates.", badge: "Free", url: "https://www.capcut.com/", category: "tools", tags: ["editing", "free"] },
+
             // === DIGITAL PRODUCTS ===
             { id: "mitolyn", title: "Mitolyn Energy Supplement", desc: "Boost your focus and mental clarity naturally", url: "https://bit.ly/4rW68th", category: "digital", tags: ["energy", "focus"] },
             { id: "energy-revolution", title: "Energy Revolution System", desc: "The system that changed how I earn online", url: "https://bit.ly/47QH0N8", category: "digital", tags: ["income", "side hustle"] },
@@ -66,6 +127,8 @@
             { id: "ab-roller", title: "Ab Roller Wheel", desc: "The only ab tool that actually works", price: "$18", url: `https://www.amazon.com/s?k=ab+roller+wheel+knee+pad&tag=${tag}`, category: "health", tags: ["abs", "core"] },
             { id: "hula-hoop", title: "Weighted Hula Hoop", desc: "Lost 2 inches in my waist using this", price: "$25", url: `https://www.amazon.com/s?k=weighted+hula+hoop+adjustable+adult&tag=${tag}`, category: "health", tags: ["weight loss", "fun"] },
             { id: "ankle-weights", title: "Adjustable Ankle Weights", desc: "Burn 40% more calories on every walk", price: "$20", url: `https://www.amazon.com/s?k=adjustable+ankle+weights+walking&tag=${tag}`, category: "health", tags: ["walking", "cardio"] },
+            { id: "pushup-board", title: "Push-Up Board System", desc: "Full chest workout at home for $25", price: "$25", url: `https://www.amazon.com/s?k=push+up+board+system+color+coded&tag=${tag}`, category: "health", tags: ["strength", "home gym"] },
+            { id: "ab-stimulator", title: "EMS Ab Stimulator", desc: "Wear it while working, feel it the next day", price: "$25", url: `https://www.amazon.com/s?k=EMS+ab+stimulator+muscle+toner&tag=${tag}`, category: "health", tags: ["abs", "passive"] },
 
             // === PRODUCTIVITY ===
             { id: "monitor-light", title: "Monitor Light Bar", desc: "Eliminated my eye strain instantly", price: "$25", url: `https://www.amazon.com/s?k=monitor+light+bar+LED+screen&tag=${tag}`, category: "productivity", tags: ["desk", "eye care"] },
@@ -90,6 +153,7 @@
             { id: "psych-money", title: "Psychology of Money", desc: "The book that changed how I think about wealth", price: "$15", url: `https://www.amazon.com/s?k=Psychology+of+Money+Morgan+Housel&tag=${tag}`, category: "books", tags: ["finance", "mindset"] },
             { id: "rich-dad", title: "Rich Dad Poor Dad", desc: "The book your school should have made you read", price: "$10", url: `https://www.amazon.com/s?k=Rich+Dad+Poor+Dad+Robert+Kiyosaki&tag=${tag}`, category: "books", tags: ["finance", "classic"] },
             { id: "ramit", title: "I Will Teach You to Be Rich", desc: "Automate your finances in one weekend", price: "$16", url: `https://www.amazon.com/s?k=I+Will+Teach+You+to+Be+Rich+Ramit+Sethi&tag=${tag}`, category: "books", tags: ["finance", "automation"] },
+            { id: "atomic-habits", title: "Atomic Habits", desc: "Small changes that transform your life", price: "$14", url: `https://www.amazon.com/s?k=Atomic+Habits+James+Clear&tag=${tag}`, category: "books", tags: ["habits", "growth"] },
             { id: "budget-planner", title: "Budget Planner Journal", desc: "Paid for itself in one month", price: "$10", url: `https://www.amazon.com/s?k=budget+planner+financial+organizer+monthly&tag=${tag}`, category: "books", tags: ["budgeting", "planning"] },
             { id: "cash-wallet", title: "Cash Envelope Wallet", desc: "The viral TikTok budgeting system", price: "$15", url: `https://www.amazon.com/s?k=cash+envelope+wallet+budget+system&tag=${tag}`, category: "books", tags: ["budgeting", "cash"] },
             { id: "100-startup", title: "The $100 Startup", desc: "Start a business with just $100", price: "$12", url: `https://www.amazon.com/s?k=The+100+Startup+Chris+Guillebeau&tag=${tag}`, category: "books", tags: ["business", "startup"] },
@@ -106,6 +170,7 @@
 
         const categories = {
             all: "All",
+            tools: "Tools & Apps",
             digital: "Digital",
             health: "Health",
             productivity: "Productivity",
@@ -133,11 +198,14 @@
                 a.className = 'link-card';
                 a.target = '_blank';
                 a.rel = 'noopener';
+                const priceHtml = link.price ? `<div class="price">${link.price}${link.category !== 'tools' ? ' on Amazon' : ''}</div>` : '';
+                const badgeHtml = link.badge ? `<div class="badge-free">${link.badge}</div>` : '';
+                const tagsHtml = link.tags.map(t => `<span class="tag${link.hot ? ' hot' : ''}">${t}</span>`).join(' ');
                 a.innerHTML = `
                     <div class="title">${link.title}</div>
                     <div class="desc">${link.desc}</div>
-                    ${link.price ? `<div class="price">${link.price} on Amazon</div>` : ''}
-                    ${link.tags.map(t => `<span class="tag">${t}</span>`).join(' ')}
+                    ${priceHtml}${badgeHtml}
+                    ${tagsHtml}
                 `;
                 container.appendChild(a);
             });
